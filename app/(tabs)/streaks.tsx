@@ -78,7 +78,7 @@ export default function StreaksScreen() {
                 HABITS_COLLECTION_ID,
                 [Query.equal("user_id", user?.$id ?? "")]
             );
-            setHabits(response.documents as Habit[]);
+            setHabits(response.documents as unknown as Habit[]);
         } catch (error) {
             console.error(error);
         }
@@ -91,7 +91,7 @@ export default function StreaksScreen() {
                 COMPLETIONS_COLLECTION_ID,
                 [Query.equal("user_id", user?.$id ?? "")]
             );
-            const completions = response.documents as HabitCompletion[];
+            const completions = response.documents as unknown as HabitCompletion[];
             setCompletedHabits(completions);
         } catch (error) {
             console.error(error);

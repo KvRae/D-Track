@@ -35,7 +35,7 @@ export default function AuthScreen() {
                     setError(error);
                     return
                 }
-                router.replace("/(tabs)/home")
+                router.replace("//(tabs)/home")
             })
         }
     }

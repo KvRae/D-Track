@@ -7,7 +7,7 @@ export default function Index() {
       style={styles.view}
     >
       <Text>This is my home screen</Text>
-        <Link style={styles.button} href="/app/(tabs)/streaks">Login Page</Link>
+        <Link style={styles.button} href={"/(tabs)/streaks"}>Login Page</Link>
     </View>
   );
 }
