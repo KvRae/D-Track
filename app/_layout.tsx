@@ -7,15 +7,15 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 function RouteGuard({ children }: { children: React.ReactNode }) {
     const router = useRouter();
-    const { user, isLoading } = useAuth();
+    const { user, isLoadingUser } = useAuth();
     const segments = useSegments();
 
     useEffect(() => {
         const inAuthGroup = segments[0] === "auth";
 
-        if (!user && !inAuthGroup && !isLoading) {
+        if (!user && !inAuthGroup && !isLoadingUser) {
             router.replace("/auth");
-        } else if (user && inAuthGroup && !isLoading) {
+        } else if (user && inAuthGroup && !isLoadingUser) {
             router.replace("/");
         }
     }, [user, segments]);
@@ -25,14 +25,18 @@ function RouteGuard({ children }: { children: React.ReactNode }) {
 
 export default function RootLayout() {
     return (
+        <GestureHandlerRootView style={{ flex: 1 }}>
             <AuthProvider>
                 <PaperProvider>
+                    <SafeAreaProvider>
                         <RouteGuard>
                             <Stack>
                                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
                             </Stack>
                         </RouteGuard>
+                    </SafeAreaProvider>
                 </PaperProvider>
             </AuthProvider>
+        </GestureHandlerRootView>
     );
 }
